@@ -1,5 +1,5 @@
 //
-//  FLViewController.h
+//  FLProfileViewController.h
 //  Footloose
 //
 //  Created by kevin on 5/5/14.
@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface FLViewController : UIViewController
+@interface FLProfileViewController : UIViewController
 
 @end
