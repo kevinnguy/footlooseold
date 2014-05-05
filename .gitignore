@@ -27,6 +27,5 @@ DerivedData
 # - kevin
 Pods/
 
-# Mac
- 
- .DS_Store
+# Mac 
+.DS_Store
