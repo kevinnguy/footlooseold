@@ -26,3 +26,7 @@ DerivedData
 # Then why should I rely on CocoaPods? The whole point is to not have to check in your Pods folder >:(
 # - kevin
 Pods/
+
+# Mac
+ 
+ .DS_Store
