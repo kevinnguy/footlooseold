@@ -21,10 +21,6 @@
 		0A3BABAB191806AB00B1B2DF /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A3BAB8A191806AB00B1B2DF /* UIKit.framework */; };
 		0A3BABB3191806AB00B1B2DF /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0A3BABB1191806AB00B1B2DF /* InfoPlist.strings */; };
 		0A3BABB5191806AB00B1B2DF /* FootlooseTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A3BABB4191806AB00B1B2DF /* FootlooseTests.m */; };
-		0A3BABC21918092100B1B2DF /* FLLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A3BABC11918092100B1B2DF /* FLLoginViewController.m */; };
-		0A3BABC619180E2A00B1B2DF /* FLMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A3BABC519180E2A00B1B2DF /* FLMainViewController.m */; };
-		0A3BABC91918130900B1B2DF /* FLAddFriendViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A3BABC81918130900B1B2DF /* FLAddFriendViewController.m */; };
-		0A3BABCC1918142000B1B2DF /* FLProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A3BABCB1918142000B1B2DF /* FLProfileViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -56,14 +52,6 @@
 		0A3BABB0191806AB00B1B2DF /* FootlooseTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "FootlooseTests-Info.plist"; sourceTree = "<group>"; };
 		0A3BABB2191806AB00B1B2DF /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		0A3BABB4191806AB00B1B2DF /* FootlooseTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FootlooseTests.m; sourceTree = "<group>"; };
-		0A3BABC01918092100B1B2DF /* FLLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLLoginViewController.h; sourceTree = "<group>"; };
-		0A3BABC11918092100B1B2DF /* FLLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLLoginViewController.m; sourceTree = "<group>"; };
-		0A3BABC419180E2A00B1B2DF /* FLMainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLMainViewController.h; sourceTree = "<group>"; };
-		0A3BABC519180E2A00B1B2DF /* FLMainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLMainViewController.m; sourceTree = "<group>"; };
-		0A3BABC71918130900B1B2DF /* FLAddFriendViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLAddFriendViewController.h; sourceTree = "<group>"; };
-		0A3BABC81918130900B1B2DF /* FLAddFriendViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLAddFriendViewController.m; sourceTree = "<group>"; };
-		0A3BABCA1918142000B1B2DF /* FLProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLProfileViewController.h; sourceTree = "<group>"; };
-		0A3BABCB1918142000B1B2DF /* FLProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLProfileViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -162,14 +150,6 @@
 		0A3BABBE191808D700B1B2DF /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				0A3BABC01918092100B1B2DF /* FLLoginViewController.h */,
-				0A3BABC11918092100B1B2DF /* FLLoginViewController.m */,
-				0A3BABC419180E2A00B1B2DF /* FLMainViewController.h */,
-				0A3BABC519180E2A00B1B2DF /* FLMainViewController.m */,
-				0A3BABC71918130900B1B2DF /* FLAddFriendViewController.h */,
-				0A3BABC81918130900B1B2DF /* FLAddFriendViewController.m */,
-				0A3BABCA1918142000B1B2DF /* FLProfileViewController.h */,
-				0A3BABCB1918142000B1B2DF /* FLProfileViewController.m */,
 			);
 			name = "View Controllers";
 			sourceTree = "<group>";
@@ -293,12 +273,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0A3BABC21918092100B1B2DF /* FLLoginViewController.m in Sources */,
 				0A3BAB97191806AB00B1B2DF /* FLAppDelegate.m in Sources */,
-				0A3BABCC1918142000B1B2DF /* FLProfileViewController.m in Sources */,
 				0A3BAB93191806AB00B1B2DF /* main.m in Sources */,
-				0A3BABC91918130900B1B2DF /* FLAddFriendViewController.m in Sources */,
-				0A3BABC619180E2A00B1B2DF /* FLMainViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
