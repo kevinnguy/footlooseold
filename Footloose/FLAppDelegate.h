@@ -8,6 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
+
+#import "FLContactTableViewController.h"
+#import <SlideNavigationController.h>
+
 @interface FLAppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;

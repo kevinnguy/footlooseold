@@ -23,10 +23,38 @@
             </objects>
             <point key="canvasLocation" x="410" y="204"/>
         </scene>
-        <!--Navigation Controller-->
+        <!--Contact Table View Controller-->
+        <scene sceneID="zDx-Jx-Bmf">
+            <objects>
+                <tableViewController storyboardIdentifier="FLContactTableViewController" id="S8h-Oj-Llb" customClass="FLContactTableViewController" sceneMemberID="viewController">
+                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="GrB-SN-YuW">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="gLY-L6-cLV">
+                                <rect key="frame" x="0.0" y="22" width="320" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="gLY-L6-cLV" id="L0y-7z-444">
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="S8h-Oj-Llb" id="8dn-kq-b37"/>
+                            <outlet property="delegate" destination="S8h-Oj-Llb" id="x9W-CY-ulD"/>
+                        </connections>
+                    </tableView>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="DPl-j1-Kvm" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="842" y="204"/>
+        </scene>
+        <!--Slide Navigation Controller-->
         <scene sceneID="Ktd-6J-OWM">
             <objects>
-                <navigationController definesPresentationContext="YES" id="clP-9O-1G6" sceneMemberID="viewController">
+                <navigationController definesPresentationContext="YES" id="clP-9O-1G6" customClass="SlideNavigationController" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="yll-gA-XOh">
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>

@@ -8,11 +8,16 @@
 
 #import "FLAppDelegate.h"
 
+
 @implementation FLAppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    // Override point for customization after application launch.
+    UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main_iPhone" bundle: nil];
+    FLContactTableViewController *leftViewController = (FLContactTableViewController*)[mainStoryboard instantiateViewControllerWithIdentifier: @"FLContactTableViewController"];
+    
+    [SlideNavigationController sharedInstance].leftMenu = leftViewController;
+    
     return YES;
 }
 							

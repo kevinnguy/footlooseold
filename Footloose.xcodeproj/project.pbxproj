@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		0A313C411927FEBB006CC8E7 /* FLMessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A313C401927FEBB006CC8E7 /* FLMessageViewController.m */; };
+		0A313C4419281161006CC8E7 /* FLContactTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A313C4319281161006CC8E7 /* FLContactTableViewController.m */; };
+		0A313C4719281BDB006CC8E7 /* FLContactTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A313C4619281BDB006CC8E7 /* FLContactTableViewCell.m */; };
+		0A313C4919281BF6006CC8E7 /* FLContactTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0A313C4819281BF6006CC8E7 /* FLContactTableViewCell.xib */; };
 		0A3BAB87191806AB00B1B2DF /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A3BAB86191806AB00B1B2DF /* Foundation.framework */; };
 		0A3BAB89191806AB00B1B2DF /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A3BAB88191806AB00B1B2DF /* CoreGraphics.framework */; };
 		0A3BAB8B191806AB00B1B2DF /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A3BAB8A191806AB00B1B2DF /* UIKit.framework */; };
@@ -38,6 +41,11 @@
 /* Begin PBXFileReference section */
 		0A313C3F1927FEBB006CC8E7 /* FLMessageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLMessageViewController.h; sourceTree = "<group>"; };
 		0A313C401927FEBB006CC8E7 /* FLMessageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLMessageViewController.m; sourceTree = "<group>"; };
+		0A313C4219281161006CC8E7 /* FLContactTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLContactTableViewController.h; sourceTree = "<group>"; };
+		0A313C4319281161006CC8E7 /* FLContactTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLContactTableViewController.m; sourceTree = "<group>"; };
+		0A313C4519281BDB006CC8E7 /* FLContactTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLContactTableViewCell.h; sourceTree = "<group>"; };
+		0A313C4619281BDB006CC8E7 /* FLContactTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLContactTableViewCell.m; sourceTree = "<group>"; };
+		0A313C4819281BF6006CC8E7 /* FLContactTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FLContactTableViewCell.xib; sourceTree = "<group>"; };
 		0A3BAB83191806AB00B1B2DF /* Footloose.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Footloose.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0A3BAB86191806AB00B1B2DF /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		0A3BAB88191806AB00B1B2DF /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -161,6 +169,8 @@
 			children = (
 				0A313C3F1927FEBB006CC8E7 /* FLMessageViewController.h */,
 				0A313C401927FEBB006CC8E7 /* FLMessageViewController.m */,
+				0A313C4219281161006CC8E7 /* FLContactTableViewController.h */,
+				0A313C4319281161006CC8E7 /* FLContactTableViewController.m */,
 			);
 			name = "View Controllers";
 			sourceTree = "<group>";
@@ -181,6 +191,9 @@
 		0A3BABC319180CB800B1B2DF /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				0A313C4519281BDB006CC8E7 /* FLContactTableViewCell.h */,
+				0A313C4619281BDB006CC8E7 /* FLContactTableViewCell.m */,
+				0A313C4819281BF6006CC8E7 /* FLContactTableViewCell.xib */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -264,6 +277,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0A313C4919281BF6006CC8E7 /* FLContactTableViewCell.xib in Resources */,
 				0A3BAB9D191806AB00B1B2DF /* Main_iPad.storyboard in Resources */,
 				0A3BABA2191806AB00B1B2DF /* Images.xcassets in Resources */,
 				0A3BAB9A191806AB00B1B2DF /* Main_iPhone.storyboard in Resources */,
@@ -321,6 +335,8 @@
 			files = (
 				0A3BAB97191806AB00B1B2DF /* FLAppDelegate.m in Sources */,
 				0A313C411927FEBB006CC8E7 /* FLMessageViewController.m in Sources */,
+				0A313C4419281161006CC8E7 /* FLContactTableViewController.m in Sources */,
+				0A313C4719281BDB006CC8E7 /* FLContactTableViewCell.m in Sources */,
 				0A3BAB93191806AB00B1B2DF /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

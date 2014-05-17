@@ -8,6 +8,8 @@
 
 #import "JSQMessagesViewController.h"
 
-@interface FLMessageViewController : JSQMessagesViewController
+#import <SlideNavigationController.h>
+
+@interface FLMessageViewController : JSQMessagesViewController <SlideNavigationControllerDelegate>
 
 @end

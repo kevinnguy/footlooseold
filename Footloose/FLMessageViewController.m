@@ -8,9 +8,14 @@
 
 #import "FLMessageViewController.h"
 
+#import "FLContactTableViewController.h"
+
 #import <JSQMessagesViewController/JSQMessages.h>
 
-@interface FLMessageViewController ()
+@interface FLMessageViewController () <FLContactTableViewDelegate>
+@property (nonatomic, strong) NSString *recipient;
+@property (nonatomic, strong) UIImage *recipientImage;
+
 @property (strong, nonatomic) NSMutableArray *messages;
 @property (copy, nonatomic) NSDictionary *avatars;
 
@@ -20,9 +25,11 @@
 
 @implementation FLMessageViewController
 
-static NSString * const kJSQDemoAvatarNameCook = @"Tim Cook";
-static NSString * const kJSQDemoAvatarNameJobs = @"Jobs";
-static NSString * const kJSQDemoAvatarNameWoz = @"Steve Wozniak";
+
+- (BOOL)slideNavigationControllerShouldDisplayLeftMenu
+{
+	return YES;
+}
 
 - (void)setupTestModel
 {
@@ -33,7 +40,7 @@ static NSString * const kJSQDemoAvatarNameWoz = @"Steve Wozniak";
      *
      *  If you are not using avatars, ignore this.
      */
-    self.sender = @"Kevin Nguy";
+    self.title = self.recipient;
 
     CGFloat outgoingDiameter = self.collectionView.collectionViewLayout.outgoingAvatarViewSize.width;
     UIImage *senderImage = [JSQMessagesAvatarFactory avatarWithImage:[UIImage imageNamed:@"kevin"]
@@ -41,11 +48,11 @@ static NSString * const kJSQDemoAvatarNameWoz = @"Steve Wozniak";
     
     CGFloat incomingDiameter = self.collectionView.collectionViewLayout.incomingAvatarViewSize.width;
     
-    UIImage *cookImage = [JSQMessagesAvatarFactory avatarWithImage:[UIImage imageNamed:@"demo_avatar_cook"]
+    UIImage *recipientImage = [JSQMessagesAvatarFactory avatarWithImage:self.recipientImage
                                                           diameter:incomingDiameter];
 
     self.avatars = @{ self.sender : senderImage,
-                      kJSQDemoAvatarNameCook : cookImage };
+                      self.recipient : recipientImage };
     
     /**
      *  Load some fake messages for demo.
@@ -54,10 +61,10 @@ static NSString * const kJSQDemoAvatarNameWoz = @"Steve Wozniak";
      */
     self.messages = [[NSMutableArray alloc] initWithObjects:
                      [[JSQMessage alloc] initWithText:@"Welcome to JSQMessages: A messaging UI framework for iOS." sender:self.sender date:[NSDate distantPast]],
-                     [[JSQMessage alloc] initWithText:@"It is simple, elegant, and easy to use. There are super sweet default settings, but you can customize like crazy." sender:kJSQDemoAvatarNameWoz date:[NSDate distantPast]],
+                     [[JSQMessage alloc] initWithText:@"It is simple, elegant, and easy to use. There are super sweet default settings, but you can customize like crazy." sender:self.recipient date:[NSDate distantPast]],
                      [[JSQMessage alloc] initWithText:@"It even has data detectors. You can call me tonight. My cell number is 123-456-7890. My website is www.hexedbits.com." sender:self.sender date:[NSDate distantPast]],
-                     [[JSQMessage alloc] initWithText:@"JSQMessagesViewController is nearly an exact replica of the iOS Messages App. And perhaps, better." sender:kJSQDemoAvatarNameJobs date:[NSDate date]],
-                     [[JSQMessage alloc] initWithText:@"It is unit-tested, free, and open-source." sender:kJSQDemoAvatarNameCook date:[NSDate date]],
+                     [[JSQMessage alloc] initWithText:@"JSQMessagesViewController is nearly an exact replica of the iOS Messages App. And perhaps, better." sender:self.recipient date:[NSDate date]],
+                     [[JSQMessage alloc] initWithText:@"It is unit-tested, free, and open-source." sender:self.recipient date:[NSDate date]],
                      [[JSQMessage alloc] initWithText:@"Oh, and there's sweet documentation." sender:self.sender date:[NSDate date]],
                      nil];
     
@@ -100,9 +107,13 @@ static NSString * const kJSQDemoAvatarNameWoz = @"Steve Wozniak";
 {
     [super viewDidLoad];
     
-    self.title = @"JSQMessages";
+    self.sender = @"Kevin Nguy";
+    self.recipient = @"Tim Cook";
+    self.recipientImage = [UIImage imageNamed:@"demo_avatar_cook"];
+    self.title = self.recipient;
     
-    self.sender = @"Jesse Squires";
+    FLContactTableViewController *contactTableViewController = (FLContactTableViewController *)[SlideNavigationController sharedInstance].leftMenu;
+    contactTableViewController.delegate = self;
     
     [self setupTestModel];
     
@@ -300,26 +311,27 @@ static NSString * const kJSQDemoAvatarNameWoz = @"Steve Wozniak";
 
 - (NSAttributedString *)collectionView:(JSQMessagesCollectionView *)collectionView attributedTextForMessageBubbleTopLabelAtIndexPath:(NSIndexPath *)indexPath
 {
-    JSQMessage *message = [self.messages objectAtIndex:indexPath.item];
-    
-    /**
-     *  iOS7-style sender name labels
-     */
-    if ([message.sender isEqualToString:self.sender]) {
-        return nil;
-    }
-    
-    if (indexPath.item - 1 > 0) {
-        JSQMessage *previousMessage = [self.messages objectAtIndex:indexPath.item - 1];
-        if ([[previousMessage sender] isEqualToString:message.sender]) {
-            return nil;
-        }
-    }
-    
-    /**
-     *  Don't specify attributes to use the defaults.
-     */
-    return [[NSAttributedString alloc] initWithString:message.sender];
+//    JSQMessage *message = [self.messages objectAtIndex:indexPath.item];
+//    
+//    /**
+//     *  iOS7-style sender name labels
+//     */
+//    if ([message.sender isEqualToString:self.sender]) {
+//        return nil;
+//    }
+//    
+//    if (indexPath.item - 1 > 0) {
+//        JSQMessage *previousMessage = [self.messages objectAtIndex:indexPath.item - 1];
+//        if ([[previousMessage sender] isEqualToString:message.sender]) {
+//            return nil;
+//        }
+//    }
+//    
+//    /**
+//     *  Don't specify attributes to use the defaults.
+//     */
+//    return [[NSAttributedString alloc] initWithString:message.sender];
+    return nil;
 }
 
 - (NSAttributedString *)collectionView:(JSQMessagesCollectionView *)collectionView attributedTextForCellBottomLabelAtIndexPath:(NSIndexPath *)indexPath
@@ -391,7 +403,7 @@ static NSString * const kJSQDemoAvatarNameWoz = @"Steve Wozniak";
         return kJSQMessagesCollectionViewCellLabelHeightDefault;
     }
     
-    return 0.0f;
+    return 10.0f;
 }
 
 - (CGFloat)collectionView:(JSQMessagesCollectionView *)collectionView
@@ -428,5 +440,14 @@ static NSString * const kJSQDemoAvatarNameWoz = @"Steve Wozniak";
     NSLog(@"Load earlier messages!");
 }
 
+- (void)didSelectContact:(NSString *)contactName image:(UIImage *)image
+{
+    self.recipient = contactName;
+    self.recipientImage = image;
+    [self setupTestModel];
+    [self.collectionView reloadData];
+    [[SlideNavigationController sharedInstance] closeMenuWithCompletion:nil];
+    [self scrollToBottomAnimated:YES];
+}
 
 @end
