@@ -11,8 +11,10 @@
 #import "FLContactTableViewController.h"
 
 #import <JSQMessagesViewController/JSQMessages.h>
+#import <SlideNavigationController.h>
 
-@interface FLMessageViewController () <FLContactTableViewDelegate>
+
+@interface FLMessageViewController () <SlideNavigationControllerDelegate, FLContactTableViewDelegate>
 @property (nonatomic, strong) NSString *recipient;
 @property (nonatomic, strong) UIImage *recipientImage;
 
@@ -25,84 +27,6 @@
 
 @implementation FLMessageViewController
 
-
-- (BOOL)slideNavigationControllerShouldDisplayLeftMenu
-{
-	return YES;
-}
-
-- (void)setupTestModel
-{
-    /**
-     *  Create avatar images once.
-     *
-     *  Be sure to create your avatars one time and reuse them for good performance.
-     *
-     *  If you are not using avatars, ignore this.
-     */
-    self.title = self.recipient;
-
-    CGFloat outgoingDiameter = self.collectionView.collectionViewLayout.outgoingAvatarViewSize.width;
-    UIImage *senderImage = [JSQMessagesAvatarFactory avatarWithImage:[UIImage imageNamed:@"kevin"]
-                                                            diameter:outgoingDiameter];
-    
-    CGFloat incomingDiameter = self.collectionView.collectionViewLayout.incomingAvatarViewSize.width;
-    
-    UIImage *recipientImage = [JSQMessagesAvatarFactory avatarWithImage:self.recipientImage
-                                                          diameter:incomingDiameter];
-
-    self.avatars = @{ self.sender : senderImage,
-                      self.recipient : recipientImage };
-    
-    /**
-     *  Load some fake messages for demo.
-     *
-     *  You should have a mutable array or orderedSet, or something.
-     */
-    self.messages = [[NSMutableArray alloc] initWithObjects:
-                     [[JSQMessage alloc] initWithText:@"Welcome to JSQMessages: A messaging UI framework for iOS." sender:self.sender date:[NSDate distantPast]],
-                     [[JSQMessage alloc] initWithText:@"It is simple, elegant, and easy to use. There are super sweet default settings, but you can customize like crazy." sender:self.recipient date:[NSDate distantPast]],
-                     [[JSQMessage alloc] initWithText:@"It even has data detectors. You can call me tonight. My cell number is 123-456-7890. My website is www.hexedbits.com." sender:self.sender date:[NSDate distantPast]],
-                     [[JSQMessage alloc] initWithText:@"JSQMessagesViewController is nearly an exact replica of the iOS Messages App. And perhaps, better." sender:self.recipient date:[NSDate date]],
-                     [[JSQMessage alloc] initWithText:@"It is unit-tested, free, and open-source." sender:self.recipient date:[NSDate date]],
-                     [[JSQMessage alloc] initWithText:@"Oh, and there's sweet documentation." sender:self.sender date:[NSDate date]],
-                     nil];
-    
-
-    
-    /**
-     *  Change to add more messages for testing
-     */
-    NSUInteger messagesToAdd = 0;
-    NSArray *copyOfMessages = [self.messages copy];
-    for (NSUInteger i = 0; i < messagesToAdd; i++) {
-        [self.messages addObjectsFromArray:copyOfMessages];
-    }
-    
-    /**
-     *  Change to YES to add a super long message for testing
-     *  You should see "END" twice
-     */
-    BOOL addREALLYLongMessage = NO;
-    if (addREALLYLongMessage) {
-        JSQMessage *reallyLongMessage = [JSQMessage messageWithText:@"Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur? END Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur? END" sender:self.sender];
-        [self.messages addObject:reallyLongMessage];
-    }
-}
-
-
-
-#pragma mark - View lifecycle
-
-/**
- *  Override point for customization.
- *
- *  Customize your view.
- *  Look at the properties on `JSQMessagesViewController` to see what is possible.
- *
- *  Customize your layout.
- *  Look at the properties on `JSQMessagesCollectionViewFlowLayout` to see what is possible.
- */
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -125,82 +49,66 @@
      *  Or, you can set a custom `leftBarButtonItem` and a custom `rightBarButtonItem`
      */
     
-    /**
-     *  Create bubble images.
-     *
-     *  Be sure to create your avatars one time and reuse them for good performance.
-     *
-     */
+
     self.outgoingBubbleImageView = [JSQMessagesBubbleImageFactory
                                     outgoingMessageBubbleImageViewWithColor:[UIColor jsq_messageBubbleLightGrayColor]];
     
     self.incomingBubbleImageView = [JSQMessagesBubbleImageFactory
                                     incomingMessageBubbleImageViewWithColor:[UIColor jsq_messageBubbleGreenColor]];
     
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"typing"]
-                                                                              style:UIBarButtonItemStyleBordered
-                                                                             target:self
-                                                                             action:@selector(receiveMessagePressed:)];
+    UIButton *button = [UIButton buttonWithType:UIButtonTypeInfoLight];
+    [button addTarget:self action:@selector(rightBarButtonItemPressed:) forControlEvents:UIControlEventTouchUpInside];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:button];
 }
 
-- (void)viewWillAppear:(BOOL)animated
+- (void)rightBarButtonItemPressed:(id)sender
 {
-    [super viewWillAppear:animated];
+    
 }
 
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
-    
-    /**
-     *  Enable/disable springy bubbles, default is YES.
-     *  For best results, toggle from `viewDidAppear:`
-     */
+
     self.collectionView.collectionViewLayout.springinessEnabled = NO;
 }
 
-
-
-#pragma mark - Actions
-
-- (void)receiveMessagePressed:(UIBarButtonItem *)sender
+- (void)setupTestModel
 {
-    /**
-     *  The following is simply to simulate received messages for the demo.
-     *  Do not actually do this.
-     */
+    self.title = self.recipient;
     
+    CGFloat outgoingDiameter = self.collectionView.collectionViewLayout.outgoingAvatarViewSize.width;
+    UIImage *senderImage = [JSQMessagesAvatarFactory avatarWithImage:[UIImage imageNamed:@"kevin"]
+                                                            diameter:outgoingDiameter];
     
-    /**
-     *  Show the tpying indicator
-     */
-    self.showTypingIndicator = !self.showTypingIndicator;
+    CGFloat incomingDiameter = self.collectionView.collectionViewLayout.incomingAvatarViewSize.width;
+    UIImage *recipientImage = [JSQMessagesAvatarFactory avatarWithImage:self.recipientImage
+                                                               diameter:incomingDiameter];
     
-    JSQMessage *copyMessage = [[self.messages lastObject] copy];
+    self.avatars = @{ self.sender : senderImage,
+                      self.recipient : recipientImage };
     
-    if (!copyMessage) {
-        return;
-    }
-    
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        
-        NSMutableArray *copyAvatars = [[self.avatars allKeys] mutableCopy];
-        [copyAvatars removeObject:self.sender];
-        copyMessage.sender = [copyAvatars objectAtIndex:arc4random_uniform((int)[copyAvatars count])];
-        
-        /**
-         *  This you should do upon receiving a message:
-         *
-         *  1. Play sound (optional)
-         *  2. Add new id<JSQMessageData> object to your data source
-         *  3. Call `finishReceivingMessage`
-         */
-        [JSQSystemSoundPlayer jsq_playMessageReceivedSound];
-        [self.messages addObject:copyMessage];
-        [self finishReceivingMessage];
-    });
+    self.messages = [[NSMutableArray alloc] initWithObjects:
+                     [[JSQMessage alloc] initWithText:@"Welcome to JSQMessages: A messaging UI framework for iOS." sender:self.sender date:[NSDate distantPast]],
+                     [[JSQMessage alloc] initWithText:@"It is simple, elegant, and easy to use. There are super sweet default settings, but you can customize like crazy." sender:self.recipient date:[NSDate distantPast]],
+                     [[JSQMessage alloc] initWithText:@"It even has data detectors. You can call me tonight. My cell number is 123-456-7890. My website is www.hexedbits.com." sender:self.sender date:[NSDate distantPast]],
+                     [[JSQMessage alloc] initWithText:@"JSQMessagesViewController is nearly an exact replica of the iOS Messages App. And perhaps, better." sender:self.recipient date:[NSDate date]],
+                     [[JSQMessage alloc] initWithText:@"It is unit-tested, free, and open-source." sender:self.recipient date:[NSDate date]],
+                     [[JSQMessage alloc] initWithText:@"Oh, and there's sweet documentation." sender:self.sender date:[NSDate date]],
+                     [[JSQMessage alloc] initWithText:@"Welcome to JSQMessages: A messaging UI framework for iOS." sender:self.sender date:[NSDate distantPast]],
+                     [[JSQMessage alloc] initWithText:@"It is simple, elegant, and easy to use. There are super sweet default settings, but you can customize like crazy." sender:self.recipient date:[NSDate distantPast]],
+                     [[JSQMessage alloc] initWithText:@"It even has data detectors. You can call me tonight. My cell number is 123-456-7890. My website is www.hexedbits.com." sender:self.sender date:[NSDate distantPast]],
+                     [[JSQMessage alloc] initWithText:@"JSQMessagesViewController is nearly an exact replica of the iOS Messages App. And perhaps, better." sender:self.recipient date:[NSDate date]],
+                     [[JSQMessage alloc] initWithText:@"It is unit-tested, free, and open-source." sender:self.recipient date:[NSDate date]],
+                     [[JSQMessage alloc] initWithText:@"Oh, and there's sweet documentation." sender:self.sender date:[NSDate date]],
+                     [[JSQMessage alloc] initWithText:@"Welcome to JSQMessages: A messaging UI framework for iOS." sender:self.sender date:[NSDate distantPast]],
+                     [[JSQMessage alloc] initWithText:@"It is simple, elegant, and easy to use. There are super sweet default settings, but you can customize like crazy." sender:self.recipient date:[NSDate distantPast]],
+                     [[JSQMessage alloc] initWithText:@"It even has data detectors. You can call me tonight. My cell number is 123-456-7890. My website is www.hexedbits.com." sender:self.sender date:[NSDate distantPast]],
+                     [[JSQMessage alloc] initWithText:@"JSQMessagesViewController is nearly an exact replica of the iOS Messages App. And perhaps, better." sender:self.recipient date:[NSDate date]],
+                     [[JSQMessage alloc] initWithText:@"It is unit-tested, free, and open-source." sender:self.recipient date:[NSDate date]],
+                     [[JSQMessage alloc] initWithText:@"Oh, and there's sweet documentation." sender:self.sender date:[NSDate date]],
+                     nil];
 }
-
 
 #pragma mark - JSQMessagesViewController method overrides
 
@@ -227,9 +135,32 @@
 - (void)didPressAccessoryButton:(UIButton *)sender
 {
     NSLog(@"Camera pressed!");
-    /**
-     *  Accessory button has no default functionality, yet.
-     */
+
+    self.showTypingIndicator = !self.showTypingIndicator;
+    
+    JSQMessage *copyMessage = [[self.messages lastObject] copy];
+    
+    if (!copyMessage) {
+        return;
+    }
+    
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        
+        NSMutableArray *copyAvatars = [[self.avatars allKeys] mutableCopy];
+        [copyAvatars removeObject:self.sender];
+        copyMessage.sender = [copyAvatars objectAtIndex:arc4random_uniform((int)[copyAvatars count])];
+        
+        /**
+         *  This you should do upon receiving a message:
+         *
+         *  1. Play sound (optional)
+         *  2. Add new id<JSQMessageData> object to your data source
+         *  3. Call `finishReceivingMessage`
+         */
+        [JSQSystemSoundPlayer jsq_playMessageReceivedSound];
+        [self.messages addObject:copyMessage];
+        [self finishReceivingMessage];
+    });
 }
 
 
@@ -383,7 +314,6 @@
 }
 
 
-
 #pragma mark - JSQMessages collection view flow layout delegate
 
 - (CGFloat)collectionView:(JSQMessagesCollectionView *)collectionView
@@ -440,6 +370,13 @@
     NSLog(@"Load earlier messages!");
 }
 
+#pragma mark - SlideNavigationControllerDelegate
+- (BOOL)slideNavigationControllerShouldDisplayLeftMenu
+{
+	return YES;
+}
+
+#pragma mark - FLContactTableViewDelegate
 - (void)didSelectContact:(NSString *)contactName image:(UIImage *)image
 {
     self.recipient = contactName;
