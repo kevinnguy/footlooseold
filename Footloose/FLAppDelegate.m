@@ -8,6 +8,8 @@
 
 #import "FLAppDelegate.h"
 
+#import <SlideNavigationController.h>
+#import <SlideNavigationContorllerAnimatorSlide.h>
 
 @implementation FLAppDelegate
 
@@ -17,6 +19,9 @@
     FLContactTableViewController *leftViewController = (FLContactTableViewController*)[mainStoryboard instantiateViewControllerWithIdentifier: @"FLContactTableViewController"];
     
     [SlideNavigationController sharedInstance].leftMenu = leftViewController;
+    [[SlideNavigationController sharedInstance] closeMenuWithCompletion:^{
+		[SlideNavigationController sharedInstance].menuRevealAnimator = [[SlideNavigationContorllerAnimatorSlide alloc] init];
+	}];
     
     return YES;
 }
